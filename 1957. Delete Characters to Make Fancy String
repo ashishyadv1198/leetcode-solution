@@ -1,0 +1,27 @@
+class Solution {
+    public String makeFancyString(String s) {
+        // Create a character array with maximum possible size
+        char[] result = new char[s.length()];
+        int index = 0; // To keep track of the current index in the result
+        
+        // Variable to count consecutive characters
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            // If the current character is the same as the last added character
+            if (index > 0 && result[index - 1] == s.charAt(i)) {
+                count++;
+            } else {
+                count = 1; // Reset count for a new character
+            }
+
+            // Add the character if count is less than 3
+            if (count < 3) {
+                result[index++] = s.charAt(i); // Directly place in the array
+            }
+        }
+
+        // Return the new string based on the characters added
+        return new String(result, 0, index); // Construct the result string
+    }
+}
