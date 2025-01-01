@@ -1,0 +1,33 @@
+public class Solution {
+    public int myAtoi(String s) {
+        int index = 0, n = s.length();
+        int result = 0;
+        int sign = 1;
+
+        // Step 1: Ignore leading whitespace
+        while (index < n && s.charAt(index) == ' ') {
+            index++;
+        }
+
+        // Step 2: Check for sign
+        if (index < n && (s.charAt(index) == '-' || s.charAt(index) == '+')) {
+            sign = (s.charAt(index) == '-') ? -1 : 1;
+            index++;
+        }
+
+        // Step 3: Convert digits to integer and handle overflow
+        while (index < n && Character.isDigit(s.charAt(index))) {
+            int digit = s.charAt(index) - '0';
+
+            // Check for overflow
+            if (result > (Integer.MAX_VALUE - digit) / 10) {
+                return (sign == 1) ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+
+            result = result * 10 + digit;
+            index++;
+        }
+
+        return result * sign;
+    }
+}
