@@ -1,0 +1,25 @@
+class Solution {
+    public int maxArea(int[] height) {
+        int left = 0;                  // Left pointer
+        int right = height.length - 1; // Right pointer
+        int maxArea = 0;               // Maximum area found so far
+
+        while (left < right) {
+            // Calculate the current area
+            int width = right - left;
+            int currentArea = Math.min(height[left], height[right]) * width;
+
+            // Update maxArea if currentArea is larger
+            maxArea = Math.max(maxArea, currentArea);
+
+            // Move the pointer pointing to the shorter line
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+}
